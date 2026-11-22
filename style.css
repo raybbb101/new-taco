@@ -1,0 +1,89 @@
+:root {
+  --bezel: #120f1c;
+  --hidden: #0a0810;
+  --text: #8a87a0;
+  --visible: 0.64; /* 見える範囲の割合（JS で上書き） */
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  background: var(--bezel);
+  overflow: hidden;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  font-family: system-ui, sans-serif;
+}
+
+#screen-area {
+  position: fixed;
+  left: 0; right: 0; top: 0;
+  height: calc(100dvh * var(--visible));
+  padding-top: env(safe-area-inset-top);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bezel);
+}
+
+#screen {
+  display: block;
+  border-radius: 3px;
+}
+
+#hidden-area {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  top: calc(100dvh * var(--visible));
+  background: var(--hidden);
+  border-top: 2px dashed #2a2540;
+  color: var(--text);
+  font-size: 13px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 24px;
+  gap: 6px;
+  text-align: center;
+}
+
+.small { font-size: 11px; opacity: 0.7; }
+
+#mobile-only {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: var(--bezel);
+  color: #ece8f6;
+  z-index: 10;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px;
+  line-height: 1.8;
+}
+#mobile-only .big { font-size: 48px; }
+#pc-play {
+  margin: 18px 0 10px;
+  padding: 10px 18px;
+  font: inherit;
+  font-size: 14px;
+  color: #120f1c;
+  background: #ffc83d;
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+}
+#mobile-only .keys { line-height: 1.6; }
+
+/* PC（マウス操作）や横向きのときは案内を出す */
+@media (pointer: fine) and (hover: hover), (orientation: landscape) {
+  #mobile-only { display: flex; }
+}
+/* PCであそぶを選んだとき */
+body.pc #mobile-only { display: none; }
+body.pc #hidden-area { display: none; }

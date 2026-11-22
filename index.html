@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#120f1c">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="description" content="GameSir Pocket Taco 向けのゲーム集。ノノグラムと海底カジノのカードローグライク">
+  <title>NEW TACO</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DotGothic16&display=block" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 上側：ゲーム画面（Pocket Taco 装着時に見える部分） -->
+  <div id="screen-area">
+    <canvas id="screen"></canvas>
+  </div>
+  <!-- 下側：コントローラーに隠れる部分 -->
+  <div id="hidden-area">
+    <p>この下はコントローラーで隠れる部分です</p>
+    <p class="small">見える範囲は「せってい」で調整できます</p>
+  </div>
+
+  <!-- PC・横向き用の案内 -->
+  <div id="mobile-only">
+    <div>
+      <p class="big">🐙</p>
+      <p>このゲームはスマホ（縦向き）＋ Pocket Taco 用です</p>
+      <p class="small">スマホの Chrome で開いて「アプリをインストール」</p>
+      <button id="pc-play">PCでキーボードであそぶ</button>
+      <p class="small keys">十字:矢印キー A:X B:Z X:S Y:A<br>L1:Q L2:W R2:E R1:R START:Enter SELECT:Shift</p>
+    </div>
+  </div>
+
+  <script src="engine.js"></script>
+  <script src="launcher.js"></script>
+  <script src="games/nono-core.js"></script>
+  <script src="games/nono-art1.js"></script>
+  <script src="games/nono-art2.js"></script>
+  <script src="games/nono-art3.js"></script>
+  <script src="games/nono-art4.js"></script>
+  <script src="games/nono.js"></script>
+  <script src="games/octo-sprites.js"></script>
+  <script src="games/octo-data.js"></script>
+  <script src="games/octo.js"></script>
+  <script src="main.js"></script>
+  <script>
+    if ('serviceWorker' in navigator && !/[?&]nosw\b/.test(location.search)) {
+      navigator.serviceWorker.register('sw.js');
+    }
+  </script>
+</body>
+</html>
